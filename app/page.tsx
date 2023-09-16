@@ -31,11 +31,11 @@ export default async function Home() {
           {/* notification */}
           <Notification />
         </div>
-        <h1 className="text-2xl md:text-3xl font-medium text-weird-black flex-col flex my-5 mb-6">
+        <h1 className="text-xl md:text-2xl font-medium text-weird-black flex-col flex my-5 mb-6">
           <span>
             Hey <span className="text-weird-red">User!</span>
           </span>
-          What will you listen today?
+          Click a book, on the new page scroll to bottom for magic
         </h1>
         <section>
           <div className="flex items-center gap-3">
