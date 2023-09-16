@@ -3,7 +3,7 @@
 import { Component } from "react";
 import WaveSurfer from "wavesurfer.js";
 import PlayerControls from "./PlayerControls";
-import ts from "typescript";
+
 type Props = {
   url: String | undefined;
 };
