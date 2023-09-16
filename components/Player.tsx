@@ -3,6 +3,7 @@
 import { Component } from "react";
 import WaveSurfer from "wavesurfer.js";
 import PlayerControls from "./PlayerControls";
+
 type Props = {
   url: String | undefined;
 };
@@ -23,6 +24,7 @@ export default class Player extends Component<Props, State> {
 
   componentDidMount() {
     const track = document.querySelector("#track");
+    // @ts-ignore
     const url = this.props.url;
     const waveform: WaveSurfer = WaveSurfer.create({
       barWidth: 2,
@@ -35,6 +37,7 @@ export default class Player extends Component<Props, State> {
       cursorColor: "transparent",
     });
     this.waveform = waveform;
+    // @ts-ignore
     waveform.load(url);
 
     waveform.on("finish", () => {
