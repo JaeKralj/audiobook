@@ -3,7 +3,9 @@
 import { Component } from "react";
 import WaveSurfer from "wavesurfer.js";
 import PlayerControls from "./PlayerControls";
-type Props = {};
+type Props = {
+  url: String | undefined;
+};
 
 type State = {
   playing: boolean;
@@ -21,8 +23,7 @@ export default class Player extends Component<Props, State> {
 
   componentDidMount() {
     const track = document.querySelector("#track");
-    const url =
-      "https://cdn.tunezjam.com/audio/Davido-Ft-Musa-Keys-Unavailable-(TunezJam.com).mp3";
+    const url = this.props.url;
     const waveform: WaveSurfer = WaveSurfer.create({
       barWidth: 2,
       barGap: 2,
