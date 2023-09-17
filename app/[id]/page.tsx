@@ -14,16 +14,14 @@ export default async function Book({ params }: Props) {
   const bookSnap = await getDoc(doc(db, "books", params.id));
   if (bookSnap.exists()) {
     book = bookSnap.data();
-    const audio = book.audioUrl
-      ? book.audioUrl
-      : await getSpeechUrl(book.contentSSML);
+
     if (!book.audioUrl) {
       const audio = await getSpeechUrl(book.contentSSML);
       await updateDoc(doc(db, "books", params.id), {
         audioUrl: audio,
       });
     } else {
-      audioUrl = audio;
+      audioUrl = book.audioUrl;
     }
   } else {
     // docSnap.data() will be undefined in this case
