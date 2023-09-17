@@ -11,14 +11,14 @@ export default function BookCard({ imgUrl, title, author, id }: Props) {
   return (
     <Link href={`/${id}`}>
       <div className="group mb-2 mr-5 cursor-pointer rounded-3xl shadow-lg max-w-[280px] md:max-w-xs">
-        <div className='h-[380p] md:w-[320px] w-[280px]'>
+        <div className='h-[380px] md:w-[320px] w-[282px] overflow-y-hidden'>
           <Image
             src={imgUrl}
-            width={280}
-            height={400}
-            sizes="(min-width: 48rem) 320px 380px"
+            width={282}
+            height={417.5}
+            sizes="(min-width: 48rem) 322.28px 477.14px"
             alt="book cover for title"
-            className="md:w-[320px] rounded-3xl h-[380px]"
+            className="md:w-[322.28px] rounded-3xl"
             priority
           />
         </div>
