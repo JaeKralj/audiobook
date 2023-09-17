@@ -20,6 +20,7 @@ export default async function Book({ params }: Props) {
       await updateDoc(doc(db, "books", params.id), {
         audioUrl: audio,
       });
+      audioUrl = audio;
     } else {
       audioUrl = book.audioUrl;
     }
