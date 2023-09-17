@@ -11,7 +11,7 @@ export default function BookCard({ imgUrl, title, author, id }: Props) {
   return (
     <Link href={`/${id}`}>
       <div className="group mb-2 mr-5 cursor-pointer rounded-3xl shadow-lg max-w-[280px] md:max-w-xs">
-        <div>
+        <div className='h-[380p] md:w-[320px] w-[280px]'>
           <Image
             src={imgUrl}
             width={280}
