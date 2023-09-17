@@ -16,9 +16,10 @@ export default function BookCard({ imgUrl, title, author, id }: Props) {
             src={imgUrl}
             width={280}
             height={400}
-            sizes="(min-width: 48rem) 320px 320px"
+            sizes="(min-width: 48rem) 320px 380px"
             alt="book cover for title"
             className="md:w-[320px] rounded-3xl h-[380px]"
+            priority
           />
         </div>
         <div className="p-2 flex flex-col gap-2 mb-3">
