@@ -1,6 +1,6 @@
 import Player from "@/components/Player";
 import Image from "next/image";
-import { DocumentData, doc, getDoc } from "firebase/firestore";
+import { DocumentData, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/libs/firebase";
 import { getSpeechUrl } from "@/utils/polly_synthesize";
 import Link from "next/link";
@@ -14,8 +14,17 @@ export default async function Book({ params }: Props) {
   const bookSnap = await getDoc(doc(db, "books", params.id));
   if (bookSnap.exists()) {
     book = bookSnap.data();
-    const audio = await getSpeechUrl(book.contentSSML);
-    audioUrl = audio;
+    const audio = book.audioUrl
+      ? book.audioUrl
+      : await getSpeechUrl(book.contentSSML);
+    if (!book.audioUrl) {
+      const audio = await getSpeechUrl(book.contentSSML);
+      await updateDoc(doc(db, "books", params.id), {
+        audioUrl: audio,
+      });
+    } else {
+      audioUrl = audio;
+    }
   } else {
     // docSnap.data() will be undefined in this case
     console.log("No such document!");
