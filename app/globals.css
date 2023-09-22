@@ -24,3 +24,8 @@ body {
 main {
   flex: 1;
 }
+
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+  bottom: -8px !important;
+}

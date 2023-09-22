@@ -15,6 +15,9 @@ export const getSpeechUrl = async (speechInput: string) => {
     const url = await getSynthesizeSpeechUrl({
       client: pollyClient,
       params: params,
+      options: {
+        expiresIn: 604800,
+      },
     });
     console.log(url);
     return url;
