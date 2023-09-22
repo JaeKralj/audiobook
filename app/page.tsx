@@ -40,7 +40,7 @@ export default async function Home() {
         <section>
           <div className="flex items-center gap-3">
             {/* category tabs */}
-            {Array(5)
+            {Array(3)
               .fill({ title: "Title" })
               .map((category, index) => (
                 <CategoryTab

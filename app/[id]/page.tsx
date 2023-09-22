@@ -1,6 +1,12 @@
 import Player from "@/components/Player";
 import Image from "next/image";
-import { DocumentData, doc, getDoc, updateDoc } from "firebase/firestore";
+import {
+  DocumentData,
+  doc,
+  getDoc,
+  updateDoc,
+  serverTimestamp,
+} from "firebase/firestore";
 import { db } from "@/libs/firebase";
 import { getSpeechUrl } from "@/utils/polly_synthesize";
 import Link from "next/link";
@@ -15,10 +21,15 @@ export default async function Book({ params }: Props) {
   if (bookSnap.exists()) {
     book = bookSnap.data();
 
-    if (!book.audioUrl) {
+    const updatedAt = book.updatedAt && book.updatedAt.toDate();
+    const timeDiff =
+      Math.abs(new Date().getTime() - updatedAt?.getTime()) / 1000;
+
+    if (!book.audioUrl || !book.updatedAt || timeDiff > 604000) {
       const audio = await getSpeechUrl(book.contentSSML);
       await updateDoc(doc(db, "books", params.id), {
         audioUrl: audio,
+        updatedAt: serverTimestamp(),
       });
       audioUrl = audio;
     } else {

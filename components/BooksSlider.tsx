@@ -27,7 +27,13 @@ export const BooksSlider = ({ slides }: PropTypes) => {
           spaceBetween: 10,
         },
       },
-      navigation: true,
+      pagination: true,
+      injectStyles: [
+        `
+      .swiper-horizontal > .swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal {
+        bottom: -6px;
+      }`,
+      ],
     };
 
     // Assign it to swiper element
@@ -52,9 +58,9 @@ export const BooksSlider = ({ slides }: PropTypes) => {
   return (
     // @ts-ignore
     <swiper-container ref={swiperElRef} init="false">
-      {slides.map((slide) => (
+      {slides.map((slide, i) => (
         /* @ts-ignore */
-        <swiper-slide>{slide}</swiper-slide>
+        <swiper-slide key={i}>{slide}</swiper-slide>
       ))}
       {/* @ts-ignore */}
     </swiper-container>
