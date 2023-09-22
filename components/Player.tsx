@@ -1,5 +1,6 @@
 "use client";
-
+import { CSSProperties } from "react";
+import ScaleLoader from "react-spinners/ScaleLoader";
 import { Component } from "react";
 import WaveSurfer from "wavesurfer.js";
 import PlayerControls from "./PlayerControls";
@@ -10,6 +11,7 @@ type Props = {
 
 type State = {
   playing: boolean;
+  loading: boolean;
 };
 
 export default class Player extends Component<Props, State> {
@@ -19,6 +21,7 @@ export default class Player extends Component<Props, State> {
     super(props);
     this.state = {
       playing: false,
+      loading: false,
     };
   }
 
@@ -41,7 +44,13 @@ export default class Player extends Component<Props, State> {
     waveform.load(url);
 
     waveform.on("finish", () => {
-      this.setState({ playing: false });
+      this.setState((prevState) => ({ ...prevState, playing: false }));
+    });
+    waveform.on("loading", () => {
+      this.setState((prevState) => ({ ...prevState, loading: true }));
+    });
+    waveform.on("ready", () => {
+      this.setState((prevState) => ({ ...prevState, loading: false }));
     });
   }
 
@@ -59,8 +68,13 @@ export default class Player extends Component<Props, State> {
 
     return (
       <>
-        <div className="flex items-center justify-center h-[6.25rem] bg-transparent max-w-lg mx-auto">
+        <div className="flex flex-col items-center justify-center h-[6.25rem] bg-transparent bg-blue-500 max-w-lg mx-auto">
           <div className="w-full h-[5.625rem]" id="waveform"></div>
+          <ScaleLoader
+            loading={this.state.loading}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
         </div>
         {/* play, pause, skip 10seconds ahead / behind, state */}
         <PlayerControls

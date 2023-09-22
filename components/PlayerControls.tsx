@@ -12,7 +12,7 @@ export default function PlayerControls({
   playerState,
 }: Props) {
   return (
-    <div className="px-5 py-2 bg-dark max-w-max flex items-center gap-3 mx-auto rounded-3xl">
+    <div className="px-5 py-2 bg-dark max-w-max flex items-center gap-3 mx-auto rounded-3xl mt-4">
       <div aria-hidden>
         <Image
           src="/assets/icons/music-library.svg"
